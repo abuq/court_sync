@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE configuration   
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="ArticleInfo" type="com.unbank.mybatis.entity.ArticleInfo" />
+		<typeAlias alias="ArticleContent" type="com.unbank.mybatis.entity.ArticleContent" />
+		<typeAlias alias="CourtInfo" type="com.unbank.mybatis.entity.CourtInfo" />
+	</typeAliases>
+	<!--数据源配置 这块用 BD2数据库 -->
+	<environments default="development">
+		<!--采集数据库 -->
+		<environment id="development">
+			<transactionManager type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://10.0.0.51:3306/ubk_datacenter?allowMultiQueries=true" />
+				<property name="username" value="spider" />
+				<property name="password" value="spider" />
+			</dataSource>
+		</environment>
+		<!--采集系统 -->
+		<environment id="spider">
+			<transactionManager type="jdbc" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url"
+					value="jdbc:mysql://10.0.0.50:3306/ubk_platform?allowMultiQueries=true" />
+				<property name="username" value="root" />
+				<property name="password" value="123456" />
+			</dataSource>
+		</environment>
+
+	</environments>
+	<mappers>
+		<!--userMapper.xml装载进来 同等于把“dao”的实现装载进来 -->
+		<mapper resource="com/unbank/mybatis/mapper/ArticleContentMapper.xml" />
+		<mapper resource="com/unbank/mybatis/mapper/ArticleInfoMapper.xml" />
+		<mapper resource="com/unbank/mybatis/mapper/CourtInfoMapper.xml" />
+	</mappers>
+</configuration> 
